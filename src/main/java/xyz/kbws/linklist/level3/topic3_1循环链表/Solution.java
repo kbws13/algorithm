@@ -39,4 +39,31 @@ public class Solution {
         }
         return false;
     }
+
+    /**
+     * 寻找环的入口
+     */
+    public ListNode detectCycle2(ListNode head) {
+        if(head == null) {
+            return null;
+        }
+        ListNode slow = head, fast = head;
+        while(fast != null) {
+            slow = slow.next;
+            if(fast.next != null) {
+                fast = fast.next.next;
+            }else {
+                return null;
+            }
+            if(fast == slow) {
+                ListNode prt = head;
+                while(prt != slow) {
+                    prt = prt.next;
+                    slow = slow.next;
+                }
+                return prt;
+            }
+        }
+        return null;
+    }
 }
